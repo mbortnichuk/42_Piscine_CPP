@@ -15,34 +15,34 @@
 Bureaucrat::Bureaucrat()
 {}
 
-Bureaucrat::Bureaucrat(std::string const name, int grade) : name(name) {
+Bureaucrat::Bureaucrat(std::string const name, int grade) : _name(name) {
     if (grade < 1)
         throw GradeTooHighException();
     else if (grade > 150)
         throw GradeTooLowException();
 
-    grade = grade;
+    _grade = grade;
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat & a): name(a.getName()) {
+Bureaucrat::Bureaucrat(Bureaucrat & a): _name(a.getName()) {
     if (a.getGrade() < 1)
         throw GradeTooHighException();
     else if (a.getGrade() > 150)
         throw GradeTooLowException();
-    grade = a.getGrade();
+    _grade = a.getGrade();
 }
 
 Bureaucrat & Bureaucrat::operator = (Bureaucrat const & a) {
-    grade = a.getGrade();
+    _grade = a.getGrade();
     return *this;
 }
 
 std::string const       Bureaucrat::getName() const {
-    return name;
+    return _name;
 }
 
 int                     Bureaucrat::getGrade() const {
-    return grade;
+    return _grade;
 }
 
 Bureaucrat::~Bureaucrat() {
@@ -55,10 +55,10 @@ std::ostream & operator << (std::ostream & o, Bureaucrat const & a) {
 
 
 Bureaucrat& Bureaucrat::operator++()   {  
-    --grade;
-    if (grade < 1)
+    --_grade;
+    if (_grade < 1)
         throw GradeTooHighException();
-    else if (grade > 150)
+    else if (_grade > 150)
         throw GradeTooLowException();
     return *this;  
 }  
@@ -70,10 +70,10 @@ Bureaucrat Bureaucrat::operator++(int)   {
 }
 
 Bureaucrat& Bureaucrat::operator--()   {  
-    ++grade;
-    if (grade < 1)
+    ++_grade;
+    if (_grade < 1)
         throw GradeTooHighException();
-    else if (grade > 150)
+    else if (_grade > 150)
         throw GradeTooLowException();
     return *this;  
 }  
@@ -98,9 +98,9 @@ void        Bureaucrat::signForm(Form & ref) {
     else
         ref.setIndicate(false);
     if (ref.getIndicate()) {
-        std::cout << "<" << name << "> signs <" << ref.getName() << ">." << std::endl;
+        std::cout << "<" << _name << "> signs <" << ref.getName() << ">." << std::endl;
     } else {
-        std::cout << "<" << name << "> cannot sign <" << ref.getName()
+        std::cout << "<" << _name << "> cannot sign <" << ref.getName()
         << "> because he did not see this doc or he does not have level" << std::endl;
     }
         
