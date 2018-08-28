@@ -20,12 +20,12 @@
 class Object {
 public:
 	Object(void);
-	Object(int posx, int posy, int dirx, int diry, int speed, int hp, std::string form);
+	Object(int posX, int posY, int dirX, int dirY, int speed, int hp, std::string form);
 	Object(Object const & src);
 	virtual					~Object(void);
 	int 					getX(void)const;
 	int 					getY(void)const;
-	int 					getdirX(void)const;
+	int 					getDirX(void)const;
 	int 					getdirY(void)const;
 	int 					getSpeed(void)const;
 	int						getsizeX(void)const;
@@ -33,30 +33,30 @@ public:
 	std::string&			getForm(void)const;
 	int						getHP(void)const;
 	void					setHP(int i);
-	void					setPos(int x, int y);
+	void					setPosition(int x, int y);
 	void					setDir(int x, int y);
 	void					setSpeed(int s);
 	void					setForm(std::string form);
-	void					move(Playground& win);
-	virtual void			printit(Playground& win)const;
-	virtual void			colision(Object& obj);
-	void					explode(Playground& win, int F);
-	void					print_score(Playground & win)const;
+	void					move(Playground& pl);
+	virtual void			printIt(Playground& pl)const;
+	virtual void			collide(Object& obj);
+	void					explode(Playground& pl, int f);
+	void					printScore(Playground & pl)const;
 	void					setScore(void);
-	void					setScoreZero(void);
+	void					setZeroScore(void);
 	int						getScore(void);
 	Object& operator=(Object const & rhs);
 
 protected:
-	int			m_posx;
-	int			m_posy;
-	int			m_dirx;
-	int			m_diry;
-	int			m_speed;
-	int			m_sizex;
-	std::string	m_form;
-	int			m_hp;
-	int static	m_score;
+	int			mPosX;
+	int			mPosY;
+	int			mDirX;
+	int			mDirY;
+	int			mSpeed;
+	int			mSizeX;
+	std::string	mForm;
+	int			mHP;
+	int static	mScore;
 };
 
 #endif

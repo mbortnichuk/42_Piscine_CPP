@@ -23,7 +23,7 @@ public:
 	~Enemy(void);
 	Enemy*	getHorde(void)const;
 	int			 	getNum(void)const;
-	void		 	printit(Playground& pl)const;
+	void		 	printIt(Playground& pl)const;
 	void			randomBoom(Playground& pl);
 	void			move(Playground& pl);
 	void			respawn(void);

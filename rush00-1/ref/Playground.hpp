@@ -21,19 +21,19 @@ public:
 	Playground(void);
 	Playground(Playground const & src);
 	~Playground(void);
-	void	takeSize(void);
+	void	takeWindSize(void);
 	int		getX(void)const;
 	int		getY(void)const;
-	WINDOW*	getWin(void)const;
+	WINDOW*	getWindow(void)const;
 	void	printBorder();
-	void	setColor(int i);
+	void	setClr(int i);
 	Playground& operator=(Playground const & rhs);
 
 protected:
-	int		m_sizex;
-	int		m_sizey;
-	WINDOW* m_win;
-	int		_color;
+	int		mSizex;
+	int		mSizey;
+	WINDOW* mWind;
+	int		clr;
 };
 
 #endif

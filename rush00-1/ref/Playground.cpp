@@ -12,18 +12,18 @@
 
 #include "Main.hpp"
 
-Playground::Playground(void):_color(0) {
+Playground::Playground(void):clr(0) {
 	initscr();
-	m_win = stdscr;
+	mWind = stdscr;
 	noecho();
 	curs_set(FALSE);
 	raw();
 	keypad(stdscr, TRUE);
-	getmaxyx(m_win, m_sizey, m_sizex);
+	getmaxyx(mWind, mSizey, mSizex);
 	nodelay(stdscr, TRUE);
 	if (has_colors() == FALSE) {
 		endwin();
-		std::cout << "Color are not eneable in this term." << std::endl;
+		std::cout << "This colors are not available in this terminal window." << std::endl;
 		exit(1);
 	}
 	return;
@@ -39,48 +39,47 @@ Playground::~Playground(void) {
 	return;
 }
 
-void	Playground::setColor(int i) { _color = i; }
+void	Playground::setClr(int i) { clr = i; }
 
-int 	Playground::getX(void)const { return(m_sizex - 1); }
+int 	Playground::getX(void)const { return(mSizex - 1); }
 
-int 	Playground::getY(void)const { return(m_sizey - 1); }
+int 	Playground::getY(void)const { return(mSizey - 1); }
 
-WINDOW* Playground::getWin(void)const { return(m_win); }
+WINDOW* Playground::getWindow(void)const { return(mWind); }
 
 void	Playground::printBorder() {
-	if (_color == 1) {
+	if (clr == 1) {
 		start_color();
-		init_pair(12,COLOR_GREEN,COLOR_GREEN);
+		init_pair(12, COLOR_GREEN, COLOR_GREEN);
 		attron(COLOR_PAIR(12));
 	}
 
-	if (_color == 2) {
+	if (clr == 2) {
 		start_color();
-		init_pair(14,COLOR_RED,COLOR_RED);
+		init_pair(14, COLOR_RED, COLOR_RED);
 		attron(COLOR_PAIR(14));
 	}
 
-	for (int i = 0; i < m_sizex; i++)
+	for (int i = 0; i < mSizex; i++)
 		mvprintw(getX(), i, "-");
-	for (int i = 0; i < m_sizex; i++)
+	for (int i = 0; i < mSizex; i++)
 		mvprintw(getY(), i, "-");
-	for (int i = 0; i < m_sizex; i++)
+	for (int i = 0; i < mSizex; i++)
 		mvprintw(i, 0, "|");
-	for (int i = 0; i < m_sizex; i++)
+	for (int i = 0; i < mSizex; i++)
 		mvprintw(i, getX(), "|");
 	attroff(COLOR_PAIR(14));
 	attroff(COLOR_PAIR(12));
 }
 
-void 	Playground::takeSize(void) {
-	getmaxyx(m_win, m_sizey, m_sizex);
+void 	Playground::takeWindSize(void) {
+	getmaxyx(mWind, mSizey, mSizex);
 	printBorder();
 }
 
 Playground& Playground::operator=(Playground const & rhs) {
-	m_sizex = rhs.getX() + 1;
-	m_sizey = rhs.getY() + 1;
-	m_win = rhs.getWin();
+	mSizex = rhs.getX() + 1;
+	mSizey = rhs.getY() + 1;
+	mWind = rhs.getWindow();
 	return (*this);
 }
-

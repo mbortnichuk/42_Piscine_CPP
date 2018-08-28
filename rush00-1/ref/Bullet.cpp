@@ -27,7 +27,7 @@ Bullet::Bullet(void):Object() {
 	mMax = 0;
 	mId = 0;
 	mBull = NULL;
-	m_hp = 0;
+	mHP = 0;
 	return;
 }
 
@@ -62,9 +62,9 @@ int		Bullet::checkMDisp(void) {
 }
 
 void		Bullet::start(int xPos, int yPos, int inp) {
-	int		i = checkMDisp();
+	int i = checkMDisp();
 	if (inp == 10 && i >= 0) {
-		mBull[i].setPos(xPos + 1, yPos - 1);
+		mBull[i].setPosition(xPos + 1, yPos - 1);
 		mBull[i].setHP(1);
 	}
 }
@@ -95,7 +95,7 @@ void		Bullet::printIt(Playground& pl)const {
 	attron(COLOR_PAIR(7));
 
 	for (int i = 0; i < mMax; i++)
-		mBull[i].Object::printit(pl);
+		mBull[i].Object::printIt(pl);
 	attroff(COLOR_PAIR(7));
 }
 
@@ -129,14 +129,14 @@ void		Bullet::printCharge(Playground & pl) {
 	init_pair(18,COLOR_WHITE,COLOR_BLACK);
 	attron(COLOR_PAIR(18));
 
-	mvwprintw(pl.getWin(), pl.getY() - 18 + i , pl.getX() - 38 , "             _________ ");
-	mvwprintw(pl.getWin(), pl.getY() - 17 + i , pl.getX() - 38 , "            | BOMB [] |");
-	mvwprintw(pl.getWin(), pl.getY() - 16 + i , pl.getX() - 38 , "            |_________|");
+	mvwprintw(pl.getWindow(), pl.getY() - 18 + i , pl.getX() - 38 , "             _________ ");
+	mvwprintw(pl.getWindow(), pl.getY() - 17 + i , pl.getX() - 38 , "            | BOMB [] |");
+	mvwprintw(pl.getWindow(), pl.getY() - 16 + i , pl.getX() - 38 , "            |_________|");
 
-	// mvwprintw(pl.getWin(), pl.getY() - 19 + i , pl.getX() - 46 , "   ___  ____  _______ __");
-	// mvwprintw(pl.getWin(), pl.getY() - 18 + i , pl.getX() - 46 , "  / _ \\/ __ \\/ ___/ //_/  []");
-	// mvwprintw(pl.getWin(), pl.getY() - 17 + i , pl.getX() - 46 , " / , _/ /_/ / /__/ ,<   ");
-	// mvwprintw(pl.getWin(), pl.getY() - 16 + i , pl.getX() - 46 , "/_/|_|\\____/\\___/_/|_|    [] ");
+	// mvwprintw(pl.getWindow(), pl.getY() - 19 + i , pl.getX() - 46 , "   ___  ____  _______ __");
+	// mvwprintw(pl.getWindow(), pl.getY() - 18 + i , pl.getX() - 46 , "  / _ \\/ __ \\/ ___/ //_/  []");
+	// mvwprintw(pl.getWindow(), pl.getY() - 17 + i , pl.getX() - 46 , " / , _/ /_/ / /__/ ,<   ");
+	// mvwprintw(pl.getWindow(), pl.getY() - 16 + i , pl.getX() - 46 , "/_/|_|\\____/\\___/_/|_|    [] ");
 	attroff(COLOR_PAIR(18));
 
 	if (min > mMax - (mMax / 3) || min == mMax)
@@ -147,16 +147,16 @@ void		Bullet::printCharge(Playground & pl) {
 		attron(COLOR_PAIR(6));
 
 	for (i = 1; i < mMax + 1; i++)
-		if ( i == mMax)
-			mvwprintw(pl.getWin(), pl.getY() - 16 + i , pl.getX() - 14 , "|____________");
+		if (i == mMax)
+			mvwprintw(pl.getWindow(), pl.getY() - 16 + i , pl.getX() - 14 , "|____________");
 		else
-			mvwprintw(pl.getWin(), pl.getY() - 16 + i , pl.getX() - 14 , "| ");
+			mvwprintw(pl.getWindow(), pl.getY() - 16 + i , pl.getX() - 14 , "| ");
 	
 	for (i = 1; i < mMax + 1; i++)
-		mvwprintw(pl.getWin(), pl.getY() - 16 + i , pl.getX() - 2 , "| ");
+		mvwprintw(pl.getWindow(), pl.getY() - 16 + i , pl.getX() - 2 , "| ");
 
-	while ( min > 0) {
-		mvwprintw(pl.getWin(), pl.getY() - mMax - 13 -  (min - mMax) , pl.getX() - 12, "@@@@@@@@@");
+	while (min > 0) {
+		mvwprintw(pl.getWindow(), pl.getY() - mMax - 13 -  (min - mMax) , pl.getX() - 12, "@@@@@@@@@");
 		min--;
 	}
 	attroff(COLOR_PAIR(5));

@@ -28,8 +28,8 @@ void				Champ::printIt(Playground& pl)const {
 	start_color();
 	init_pair(5,COLOR_GREEN,COLOR_BLACK);
 	attron(COLOR_PAIR(5));
-	if (m_posx >= 0 && m_posx <= pl.getX() && m_posy > 0 && m_posy < pl.getY() && m_hp > 0)
-		mvwprintw(pl.getWin(), m_posy, m_posx, m_form.data());
+	if (mPosX >= 0 && mPosX <= pl.getX() && mPosY > 0 && mPosY < pl.getY() && mHP > 0)
+		mvwprintw(pl.getWindow(), mPosY, mPosX, mForm.data());
 	attroff(COLOR_PAIR(5));
 }
 
@@ -37,31 +37,31 @@ void				Champ::printIt(Playground& pl)const {
 void Champ::inputDirection(int ch) {
 	this->input = 1;
 	if (ch == 259 || ch == 258)
-		ch == 258 ? m_diry += 1 : m_diry -= 1;
+		ch == 258 ? mDirY += 1 : mDirY -= 1;
 	else if (ch == 260 || ch == 261)
-		ch == 261 ?  m_dirx += 2 : m_dirx -= 2;
-	if (m_dirx < -2)
-		m_dirx = -2;
-	if (m_dirx > 2)
-		m_dirx = 2;
-	if (m_diry < -1)
-		m_diry = -1;
-	if (m_diry > 1)
-		m_diry = 1;
+		ch == 261 ?  mDirX += 2 : mDirX -= 2;
+	if (mDirX < -2)
+		mDirX = -2;
+	if (mDirX > 2)
+		mDirX = 2;
+	if (mDirY < -1)
+		mDirY = -1;
+	if (mDirY > 1)
+		mDirY = 1;
 }
 
 void Champ::move(Playground& pl) {
 	this->input = !this->input;
-	m_posy += (m_diry * m_speed);
-	m_posx += (m_dirx * m_speed);
-	if (m_posy <= 0)
-		m_posy = 1;
-	if (m_posy >= pl.getY() - 1)
-		m_posy = pl.getY() - 1;
-	if (m_posx <= 0)
-		m_posx = 1;
-	if (m_posx >= pl.getX() - 1)
-		m_posx = pl.getX() - 2;
+	mPosY += (mDirY * mSpeed);
+	mPosX += (mDirX * mSpeed);
+	if (mPosY <= 0)
+		mPosY = 1;
+	if (mPosY >= pl.getY() - 1)
+		mPosY = pl.getY() - 1;
+	if (mPosX <= 0)
+		mPosX = 1;
+	if (mPosX >= pl.getX() - 1)
+		mPosX = pl.getX() - 2;
 	if (this->input)
 	 	this->setDir(0, 0);
 }
@@ -74,27 +74,27 @@ void		Champ::printLives(Playground & pl)const {
 	init_pair(18,COLOR_WHITE,COLOR_BLACK);
 	attron(COLOR_PAIR(18));
 
-	mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 1, pl.getX() - 40 , "                _________ ");
-	mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 2, pl.getX() - 40 , "               | LIFE :  |");
-	mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 3 , pl.getX() - 40 , "               |_________|");
+	mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 1, pl.getX() - 40 , "                _________ ");
+	mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 2, pl.getX() - 40 , "               | LIFE :  |");
+	mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 3 , pl.getX() - 40 , "               |_________|");
 	attroff(COLOR_PAIR(18));
-	if (m_hp == 3) {
+	if (mHP == 3) {
 		attron(COLOR_PAIR(5));
 
-		mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 1 , pl.getX() - 10 , "   _____ ");
-		mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 2 , pl.getX() - 10 , "  |  3  |");
-		mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 3 , pl.getX() - 10 , "  |_____|");
+		mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 1 , pl.getX() - 10 , "   _____ ");
+		mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 2 , pl.getX() - 10 , "  |  3  |");
+		mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 3 , pl.getX() - 10 , "  |_____|");
 		attroff(COLOR_PAIR(5));
-	} else if (m_hp == 2) {
+	} else if (mHP == 2) {
 		attron(COLOR_PAIR(7));
-		mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 1 , pl.getX() - 10 , "   _____ ");
-		mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 2 , pl.getX() - 10 , "  |  2  |");
-		mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 3 , pl.getX() - 10 , "  |_____|");
+		mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 1 , pl.getX() - 10 , "   _____ ");
+		mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 2 , pl.getX() - 10 , "  |  2  |");
+		mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 3 , pl.getX() - 10 , "  |_____|");
 		attroff(COLOR_PAIR(7));
 	} else {	attron(COLOR_PAIR(6));
-		mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 1 , pl.getX() - 10 , "   _____ ");
-		mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 2 , pl.getX() - 10 , "  |  1  |");
-		mvwprintw(pl.getWin(), pl.getY() - pl.getY() + 3 , pl.getX() - 10 , "  |_____|");
+		mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 1 , pl.getX() - 10 , "   _____ ");
+		mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 2 , pl.getX() - 10 , "  |  1  |");
+		mvwprintw(pl.getWindow(), pl.getY() - pl.getY() + 3 , pl.getX() - 10 , "  |_____|");
 		attroff(COLOR_PAIR(6));
 		//refresh();
 	}
@@ -104,16 +104,16 @@ void Champ::checkEnemies(Enemy* horde, int N, Playground& pl) {
 	int center;
 	int centerv;
 	for (int i = 0; i < N; i++) {
-		if (horde[i].getY() == m_posy) {
+		if (horde[i].getY() == mPosY) {
 			center = horde[i].getX() - (horde[i].getsizeX() / 2);
-			centerv = m_posx - (m_sizex / 2);
+			centerv = mPosX - (mSizeX / 2);
 			centerv -= center;
-			if (abs(centerv) <= m_sizex) {
-				m_hp -= 1;
-				pl.setColor(2);
+			if (abs(centerv) <= mSizeX) {
+				mHP -= 1;
+				pl.setClr(2);
 				pl.printBorder();
 				horde[i].die(pl);
-				pl.setColor(0);
+				pl.setClr(0);
 			}
 		}
 	}

@@ -20,25 +20,25 @@
 
 class Jet:public Object {
 public:
-	Jet(int N, std::string form);
+	Jet(int n, std::string form);
 	Jet(Jet const & src);
 	~Jet(void);
 	Jet* getJet(void)const;
 	int	getIndex(void)const;
 	int	getMax(void)const;
-	void printit(Playground& win)const;
-	void move(Playground& win);
-	void activate(int xpos, int ypos, int input);
-	void checkDamages(Enemy*, int N, Playground& win);
-	void print_chargeur(Playground & win);
+	void printIt(Playground& pl)const;
+	void move(Playground& pl);
+	void start(int xPos, int yPos, int inp);
+	void checkDamage(Enemy*, int n, Playground& pl);
+	void printCharge(Playground & pl);
 	Jet& operator=(Jet const & rhs);
-	int			check_m_dispo(void);
+	int			checkMDisp(void);
 
 private:
 	Jet(void);
-	Jet* m_Jets;
-	int		 m_max;
-	int		 m_index;
+	Jet* mJets;
+	int		 mMax;
+	int		 mId;
 };
 
 #endif

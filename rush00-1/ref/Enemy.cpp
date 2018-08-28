@@ -15,14 +15,14 @@
 Enemy::Enemy(void):Object() {
 	mHorde = NULL;
 	mNum = 0;
-	m_hp = 1;
+	mHP = 1;
 	return;
 }
 
 Enemy::Enemy(int n) {
 	mHorde = new Enemy[n]();
 	mNum = n;
-	m_hp = 1;
+	mHP = 1;
 	return;
 }
 
@@ -67,7 +67,7 @@ void		 Enemy::randomBoom(Playground& pl) {
 		else
 			i = 2;
 
-		mHorde[a].setPos(rand() % (pl.getX() - m_sizex), rand() % (pl.getY() / 4));
+		mHorde[a].setPosition(rand() % (pl.getX() - mSizeX), rand() % (pl.getY() / 4));
 		mHorde[a].setDir(i, 1);
 		mHorde[a].setHP(1);
 		mHorde[a].setSpeed(0);
@@ -76,7 +76,7 @@ void		 Enemy::randomBoom(Playground& pl) {
 
 void		 Enemy::respawn(void) {
 	for (int i = 0; i < mNum; i++)
-		m_hp = 1;
+		mHP = 1;
 }
 
 void		Enemy::die(Playground& pl) {
@@ -97,18 +97,18 @@ void		Enemy::die(Playground& pl) {
 	this->Object::explode(pl, 0);
 	refresh();
 	usleep(10);
-	this->setPos(rand() % (pl.getX() - m_sizex), 0);
+	this->setPosition(rand() % (pl.getX() - mSizeX), 0);
 	this->setDir(i, 1);
 	this->setSpeed(0);
 	this->setHP(1);
 }
 
-void		Enemy::printit(Playground& pl)const {
+void		Enemy::printIt(Playground& pl)const {
 	start_color();
 	init_pair(8,COLOR_CYAN, COLOR_BLACK);
 	attron(COLOR_PAIR(8));
 	for (int i = 0; i < mNum; i++)
-		mHorde[i].Object::printit(pl);
+		mHorde[i].Object::printIt(pl);
 	attroff(COLOR_PAIR(8));
 }
 

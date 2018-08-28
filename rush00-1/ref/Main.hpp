@@ -25,10 +25,10 @@
 
 # define KEY_ESC 27
 
-int     get_difficult(int i);
-void    play(int i, Playground& win);
-void    print_logo(Playground win);
-void    print_menu(Playground & win);
+int     difficultyMode(int i);
+void    game(int i, Playground& pl);
+void    printLogo(Playground pl);
+void    printMenu(Playground & pl);
 void    menu(void);
 
 #endif
