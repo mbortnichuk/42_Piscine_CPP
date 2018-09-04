@@ -10,4 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Interface.class.hpp"
 
+int main(void) {
+	Interface *inter = new Interface;
+	inter->start();
+	delete inter;
+
+	return 0;
+}

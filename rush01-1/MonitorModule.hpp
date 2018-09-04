@@ -10,4 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MONITORMODULE_HPP
+# define MONITORMODULE_HPP
 
+# include <ncurses.h>
+
+class MonitorModule {
+public:
+	virtual void show(int y) = 0;
+	virtual int getHeight(void)const = 0;
+};
+
+#endif

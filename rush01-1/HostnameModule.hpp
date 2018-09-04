@@ -10,4 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef HOSTNAMEMODULE_HPP
+# define HOSTNAMEMODULE_HPP
 
+# include <sys/sysctl.h>
+# include <sys/types.h>
+# include <pwd.h>
+# include <unistd.h>
+
+# include "MonitorModule.hpp"
+
+class HostnameModule:public MonitorModule {
+public:
+	HostnameModule(void);
+	virtual ~HostnameModule(void);
+	virtual void show(int y);
+	virtual int getHeight(void)const;
+
+private:
+	HostnameModule(HostnameModule const & src);
+	HostnameModule& operator=(HostnameModule const & rhs);
+
+	int height;
+};
+
+#endif
