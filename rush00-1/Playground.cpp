@@ -5,34 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/17 17:46:15 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/08/17 17:46:16 by mbortnic         ###   ########.fr       */
+/*   Created: 2018/08/23 12:29:46 by mbortnic          #+#    #+#             */
+/*   Updated: 2018/08/23 12:29:47 by mbortnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Main.hpp"
-#include "Playground.hpp"
 
-Playground::Playground(void): _clr(0) {
+Playground::Playground(void):clr(0) {
 	initscr();
-	minWin = stdscr;
+	mWind = stdscr;
 	noecho();
 	curs_set(FALSE);
 	raw();
 	keypad(stdscr, TRUE);
-	getmaxyx(minWin, minSizeY, minSizeX);
+	getmaxyx(mWind, mSizey, mSizex);
 	nodelay(stdscr, TRUE);
 	if (has_colors() == FALSE) {
 		endwin();
-		std::cout << "This color are not available in this terminal version." << std::endl;
+		std::cout << "This colors are not available in this terminal window." << std::endl;
 		exit(1);
 	}
-	return ;
+	return;
 }
 
 Playground::Playground(Playground const & src) {
 	*this = src;
-	return ;
+	return;
 }
 
 Playground::~Playground(void) {
@@ -40,59 +39,47 @@ Playground::~Playground(void) {
 	return;
 }
 
-void Playground::setClr(int i) {
-	_clr = i;
-}
+void	Playground::setClr(int i) { clr = i; }
 
-int Playground::getX(void)const {
-	return (minSizeX - 1);
-}
+int 	Playground::getX(void)const { return(mSizex - 1); }
 
-int Playground::getY(void)const {
-	return (minSizeY - 1);
-}
+int 	Playground::getY(void)const { return(mSizey - 1); }
 
-WINDOW* Playground::getWindow(void)const {
-	return (minWin);
-}
+WINDOW* Playground::getWindow(void)const { return(mWind); }
 
-void Playground::printBorder() {
-	if (_clr == 1) {
+void	Playground::printBorder() {
+	if (clr == 1) {
 		start_color();
 		init_pair(12, COLOR_GREEN, COLOR_GREEN);
 		attron(COLOR_PAIR(12));
 	}
-	if (_clr == 2) {
+
+	if (clr == 2) {
 		start_color();
 		init_pair(14, COLOR_RED, COLOR_RED);
 		attron(COLOR_PAIR(14));
 	}
 
-	for (int i = 0; i < minSizeX; i++) {
+	for (int i = 0; i < mSizex; i++)
 		mvprintw(getX(), i, "-");
-	}
-	for (int i = 0; i < minSizeX; i++) {
+	for (int i = 0; i < mSizex; i++)
 		mvprintw(getY(), i, "-");
-	}
-	for (int i = 0; i < minSizeX; i++) {
+	for (int i = 0; i < mSizex; i++)
 		mvprintw(i, 0, "|");
-	}
-	for (int i = 0; i < minSizeX; i++) {
+	for (int i = 0; i < mSizex; i++)
 		mvprintw(i, getX(), "|");
-	}
 	attroff(COLOR_PAIR(14));
 	attroff(COLOR_PAIR(12));
 }
 
-void Playground::takeWindSize(void) {
-	getmaxyx(minWin, minSizeY, minSizeX);
+void 	Playground::takeWindSize(void) {
+	getmaxyx(mWind, mSizey, mSizex);
 	printBorder();
 }
 
 Playground& Playground::operator=(Playground const & rhs) {
-	minSizeX = rhs.getX() + 1;
-	minSizeY = rhs.getY() + 1;
-	minWin = rhs.getWindow();
-
+	mSizex = rhs.getX() + 1;
+	mSizey = rhs.getY() + 1;
+	mWind = rhs.getWindow();
 	return (*this);
 }

@@ -44,8 +44,8 @@ void CPUModule::show(int y) {
 		mvprintw(y, 0, "#------- CPU -------#");
 		mvprintw(y + 1, 1, "%s", this->CPU);
 		mvprintw(y + 2, 1, "USER   : %.2f%%", static_cast<float>(this->userTicks) / this->nCPU);
-		mvprintw(y + 2, 1, "SYSTEM : %.2f%%", static_cast<float>(this->sysTicks) / this->nCPU);
-		mvprintw(y + 2, 1, "IDLE   : %.2f%%", static_cast<float>(this->idleTicks) / this->nCPU);
+		mvprintw(y + 3, 1, "SYSTEM : %.2f%%", static_cast<float>(this->sysTicks) / this->nCPU);
+		mvprintw(y + 4, 1, "IDLE   : %.2f%%", static_cast<float>(this->idleTicks) / this->nCPU);
 	}
 }
 

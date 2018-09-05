@@ -27,7 +27,7 @@ int NetworkModule::getHeight(void)const {
 void NetworkModule::show(int y) {
 	void *oldP[1024];
 	size_t oldLength = sizeof(struct ipstat), newLength = 0;
-	void *newP;
+	void *newP = NULL;
 
 	sysctlbyname("net.inet.ip.stats", oldP, &oldLength, newP, newLength);
 

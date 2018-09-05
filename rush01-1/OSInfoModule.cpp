@@ -18,7 +18,7 @@ OSInfoModule::OSInfoModule(void):height(6) {
 
 	length = sizeof(line);
 	sysctlbyname("kern.ostype", line, &length, NULL, 0);
-	this->osType;
+	this->osType = line;
 	length = sizeof(line);
 	sysctlbyname("kern.osrelease", line, &length, NULL, 0);
 	this->osRelease = line;

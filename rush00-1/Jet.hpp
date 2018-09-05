@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/21 13:46:42 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/08/21 13:46:44 by mbortnic         ###   ########.fr       */
+/*   Created: 2018/08/23 12:04:37 by mbortnic          #+#    #+#             */
+/*   Updated: 2018/08/23 12:04:39 by mbortnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,24 @@ class Jet:public Object {
 public:
 	Jet(int n, std::string form);
 	Jet(Jet const & src);
-	~Jet();
-
+	~Jet(void);
 	Jet* getJet(void)const;
-	int getId(void)const;
-	int getMax(void)const;
-	void printIt(Playground & pl)const;
-	void move(Playground & pl);
+	int	getIndex(void)const;
+	int	getMax(void)const;
+	void printIt(Playground& pl)const;
+	void move(Playground& pl);
 	void start(int xPos, int yPos, int inp);
-	void checkDamage(Enemy* enemy, int n, Playground & pl);
+	void checkDamage(Enemy*, int n, Playground& pl);
 	void printCharge(Playground & pl);
-	int checkMDisp(void);
-
 	Jet& operator=(Jet const & rhs);
+	int			checkMDisp(void);
 
 private:
 	Jet(void);
 	Jet* mJets;
-	int mMax;
-	int mId;
+	int		 mMax;
+	int		 mId;
 };
 
 #endif
+

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/21 16:43:48 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/08/21 16:43:50 by mbortnic         ###   ########.fr       */
+/*   Created: 2018/08/23 12:17:29 by mbortnic          #+#    #+#             */
+/*   Updated: 2018/08/23 12:17:30 by mbortnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,22 @@ public:
 	Bullet(int n, std::string form);
 	Bullet(Bullet const & src);
 	~Bullet(void);
-
-	Bullet* getBull(void)const;
-	int getId(void)const;
-	int getMax(void)const;
-	void printIt(Playground & pl)const;
+	Bullet* getBull(void)const;	
+	int	getId(void)const;		
+	int	getMax(void)const;
+	void printIt(Playground& pl)const;
 	void move(Playground& pl);
 	void start(int xPos, int yPos, int inp);
-	void checkDamage(Enemy* enemy, int n, Playground& pl);
-	void printCharge(Playground& pl);
-	int checkMDisp(void);
-
+	void checkDamage(Enemy* horde, int n, Playground& pl);
+	void printCharge(Playground & pl);
 	Bullet& operator=(Bullet const & rhs);
+	int			checkMDisp(void);
 
 private:
 	Bullet(void);
 	Bullet* mBull;
-	int mMax;
-	int mId;
+	int		 mMax;;
+	int		 mId;
 };
 
 #endif

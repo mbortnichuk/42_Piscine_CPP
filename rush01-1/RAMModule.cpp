@@ -45,7 +45,7 @@ void RAMModule::show(int y) {
 
 		mvprintw(y + 1, 0, "Free memory  : %lldM", freeMem / 1000000);
 		mvprintw(y + 2, 0, "Wired memory : %lldM", wired / 1000000);
-		mvprintw(y + 3, 0, "Used memory  : %lldM", freeMem / 1000000);
+		mvprintw(y + 3, 0, "Used memory  : %lldM", usedMem / 1000000);
 	}
 	mvprintw(y + 4, 0, "Total memory     : %lluM", getMem() / 1000000);
 }
