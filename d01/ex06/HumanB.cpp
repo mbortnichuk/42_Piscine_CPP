@@ -17,7 +17,8 @@ HumanB::HumanB(std::string name) {
 }
 
 HumanB::HumanB(std::string name, Weapon& weapon) {
-	std::cout << this->name << " attacks with his " << this->weapon->getType() << std::endl;
+	this->name = name;
+	this->weapon = &weapon;
 }
 
 void	HumanB::attack()const {

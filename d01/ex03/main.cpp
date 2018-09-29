@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/15 20:44:21 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/06/15 20:44:22 by mbortnic         ###   ########.fr       */
+/*   Created: 2018/06/15 18:50:53 by mbortnic          #+#    #+#             */
+/*   Updated: 2018/09/29 17:25:41 by mbortnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "Human.hpp"
+#include "ZombieHorde.hpp"
 
-int main()
-{
-	Human bob;
-
-	std::cout << bob.identify() << std::endl;
-	std::cout << bob.getBrain().identify() << std::endl;
+int main() {
+	srand(time(0));
+	ZombieHorde zombie(12);
+	zombie.announce();
 	return 0;
 }

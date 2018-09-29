@@ -10,38 +10,92 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include "Replace.hpp"
 
-Replace::Replace(std::string input, std::string output) {
-	this->input = input;
-	this->output = output;
+Replace::Replace(void) {
+	this->s1 = "null";
+	this->s2 = "null";
+	this->fileName = "null.replace";
 }
 
-void	Replace::replace(std::string s1, std::string s2) {
-	std::string buffer;
-	std::fstream input(this->input);
+Replace::Replace(std::string s1, std::string s2, std::string fileName) {
+	this->s1 = s1;
+	this->s2 = s2;
+	this->fileName = fileName;
 
-	if (s1 == "") {
-		std::cout << "Wrong input \"\"" << std::endl;
-		return ;
+	for (size_t i = 0; i < fileName.length(); ++i) {
+		fileName[i] = toupper(fileName[i]);
 	}
-	if (!input.is_open()) {
-		std::cout << "File is not available" << std::endl;
-		return ;
+	this->createFileName = std::string(fileName + ".replace");
+}
+
+Replace::~Replace(void) {
+	return ;
+}
+
+void Replace::setS1(std::string s) {
+	this->s1 = s;
+}
+void Replace::setS2(std::string s) {
+	this->s2 = s;
+}
+void Replace::setFileName(std::string fileName) {
+	this->fileName = fileName;
+}
+
+std::string Replace::getS1(void) {
+	return (this->s1);
+}
+std::string Replace::getS2(void) {
+	return (this->s2);
+}
+std::string Replace::getFileName(void) {
+	return (this->fileName);
+}
+
+std::string Replace::getCreateFileName(void) {
+	return (this->createFileName);
+}
+
+// Validation
+
+void 	Replace::validation(void) {
+	if (this->s1.length() == 0 || this->s2.length() == 0) {
+		std::cout << "empty string\n";
+		std::exit(1);
 	}
-	std::ofstream output(this->output);
-	while (getline(input, buffer)) {
-		size_t p = buffer.find(s1, 0);
-		while (p != std::string::npos) {
-			buffer.replace(p, s1.length(), s2);
-			p = buffer.find(s1, p + s2.length());
+}
+
+bool	Replace::replaceFile(void) {
+	std::ifstream myFile(this->getFileName());
+	if (myFile.is_open()) {
+		std::string line;
+		std::fstream file;
+		file.open(this->getCreateFileName(), std::fstream::in | std::fstream::out | std::fstream::app);
+		while (std::getline(myFile, line)) {
+			while (1) {
+				size_t i = line.find(this->getS1());
+				if (i != std::string::npos) {
+					line.replace(i, this->getS1().length(), this->getS2());
+					for (size_t j = 0; j < i; j++) {
+						file << line[j];
+					}
+					std::string tmp = this->getS2();
+					for (size_t j = 0; j < tmp.length(); j++) {
+						file << tmp[j];
+					}
+					line = &line[i + this->getS2().length()];
+				}
+				else {
+					file << line << '\n';
+					break ;
+				}
+			}
 		}
-		output << buffer << std::endl;
+		file.close();
+		myFile.close();
+		return (true);
 	}
-	input.close();
-	output.close();
-}
-
-Replace::~Replace() {
-	std::cout << this->output << " file has been created" << std::endl;
+	return (false);
 }

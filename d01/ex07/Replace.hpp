@@ -12,20 +12,29 @@
 
 #ifndef REPLACE_HPP
 # define REPLACE_HPP
+#include <iostream>
+#include <fstream>
 
-# include <iostream>
-# include <fstream>
-# include <string>
+class 	Replace {
+	private:
+		std::string fileName;
+		std::string createFileName;
+		std::string s1;
+		std::string s2;
+	public:
+		Replace(void);
+		Replace(std::string s1, std::string s2, std::string fileName);
+		~Replace(void);
 
-class Replace {
-private:
-	std::string input;
-	std::string output;
-public:
-	Replace();
-	Replace(std::string input, std::string output);
-	void	replace(std::string s1, std::string s2);
-	~Replace();
+		void setS1(std::string s);
+		void setS2(std::string s);
+		void setFileName(std::string fileName);
+		std::string getS1(void);
+		std::string getS2(void);
+		std::string getFileName(void);
+		std::string getCreateFileName(void);
+		bool		replaceFile(void);
+		void 		validation(void);
 };
 
 #endif
