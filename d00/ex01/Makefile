@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = phonebook
-SRC = main.cpp PhoneBook.cpp
+SRC = main.cpp PhoneBook.cpp DB.cpp
 FLG = -Wall -Wextra -Werror
 OBJ = $(SRC:.cpp=.o)
 CC = clang++
