@@ -133,10 +133,6 @@ void		Bullet::printCharge(Playground & pl) {
 	mvwprintw(pl.getWindow(), pl.getY() - 17 + i , pl.getX() - 38 , "            | BOMB [] |");
 	mvwprintw(pl.getWindow(), pl.getY() - 16 + i , pl.getX() - 38 , "            |_________|");
 
-	// mvwprintw(pl.getWindow(), pl.getY() - 19 + i , pl.getX() - 46 , "   ___  ____  _______ __");
-	// mvwprintw(pl.getWindow(), pl.getY() - 18 + i , pl.getX() - 46 , "  / _ \\/ __ \\/ ___/ //_/  []");
-	// mvwprintw(pl.getWindow(), pl.getY() - 17 + i , pl.getX() - 46 , " / , _/ /_/ / /__/ ,<   ");
-	// mvwprintw(pl.getWindow(), pl.getY() - 16 + i , pl.getX() - 46 , "/_/|_|\\____/\\___/_/|_|    [] ");
 	attroff(COLOR_PAIR(18));
 
 	if (min > mMax - (mMax / 3) || min == mMax)

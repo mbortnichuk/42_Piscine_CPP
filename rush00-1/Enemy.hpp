@@ -30,7 +30,6 @@ public:
 	Enemy*		getHorde(void);
 	int				getNum(void);
 	void			die(Playground& pl);
-	// void			attack(Object& trg);
 	Enemy& operator=(Enemy const & rhs);
 
 private:

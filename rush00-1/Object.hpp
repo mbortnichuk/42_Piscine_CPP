@@ -41,7 +41,6 @@ public:
 	virtual void			printIt(Playground& pl)const;
 	virtual void			collide(Object& obj);
 	void					explode(Playground& pl, int f);
-	void					printScore(Playground & pl)const;
 	void					setScore(void);
 	void					setZeroScore(void);
 	int						getScore(void);

@@ -27,26 +27,39 @@ int		difficultyMode(int i) {
 void	printDead(Playground & pl, Champ ch) {
 	(void)ch;
 	start_color();
-	init_pair(6 ,COLOR_RED,COLOR_BLACK);
+	init_pair(6 ,COLOR_MAGENTA ,COLOR_BLACK);
+	init_pair(12 ,COLOR_WHITE ,COLOR_BLACK);
 	attron(COLOR_PAIR(6));
+	int y = 10;                       
+  mvprintw(y++, 27, "               \\`*-.");                    
+  mvprintw(y++, 27, "               )  _`-.   ");              
+  mvprintw(y++, 27, "              .  : `. .       ");         
+  mvprintw(y++, 27, "              : _   '  \\       ");        
+  mvprintw(y++, 27, "              ; *` _.   `*-._        ");  
+  mvprintw(y++, 27, "              `-.-'          `-.       ");
+  mvprintw(y++, 27, "                ;       `       `.     ");
+  mvprintw(y++, 27, "                :.       .        \\    ");
+  mvprintw(y++, 27, "                . \\  .   :   .-'   .   ");
+  mvprintw(y++, 27, "                '  `+.;  ;  '      :   ");
+  mvprintw(y++, 27, "                :  '  |    ;       ;-. ");
+  mvprintw(y++, 27, "                ; '   : :`-:     _.`* ;");
+  mvprintw(y++, 27, "             .*' /  .*' ; .*`- +'  `*' ");
+   mvprintw(y+=3, 27, "            `*-*   `*-*  `*-*' ");
+	attron(COLOR_PAIR(12));
+   mvprintw(y++, 27, "________________________________________");
+   mvprintw(y++, 27, "|          SORRY, YOU ARE DEAD          |");
+   mvprintw(y++, 27, "|_______________________________________|");
+   attron(COLOR_PAIR(12));
 
-	mvprintw(pl.getY() / 3 + pl.getY() / 12, pl.getX() / 3 + pl.getX() / 16, " _____________________ ");
-	mvprintw(pl.getY() / 3 + pl.getY() / 12 + 1, pl.getX() / 3 + pl.getX() / 16, "| SORRY, YOU ARE DEAD |");
-	mvprintw(pl.getY() / 3 + pl.getY() / 12 + 2, pl.getX() / 3 + pl.getX() / 16, "|_____________________|");
-
-	start_color();
-	init_pair(19, COLOR_GREEN, COLOR_BLACK);
-	attron(COLOR_PAIR(19));
-	mvprintw(pl.getY() / 3 + pl.getY() / 12 + 19, pl.getX() / 3 + pl.getX() / 7 - 8, "    _____________    ");
-	mvprintw(pl.getY() / 3 + pl.getY() / 12 + 20, pl.getX() / 3 + pl.getX() / 7 - 8, "   |  SCORE :    |   ");
-	mvprintw(pl.getY() / 3 + pl.getY() / 12 + 21, pl.getX() / 3 + pl.getX() / 7 - 8, "   |_____________|   ");
-	std::string		str;
-	mvprintw(pl.getY() / 3 + pl.getY() / 12 + 20, pl.getX() / 3 + pl.getX() / 7, str.c_str());
-	attroff(COLOR_PAIR(19));
-
-	refresh();
 	attroff(COLOR_PAIR(6));
-	sleep(2);
+	refresh();
+	if (COLS != 50 || LINES != 100)
+	{
+		system("printf '\e[8;50;100t'");
+		sleep(4);
+		 refresh();
+	}
+	sleep(4);
 }
 
 void	game(int i, Playground& pl) {
@@ -61,7 +74,6 @@ void	game(int i, Playground& pl) {
 	champ.setZeroScore();
 	while (inp != KEY_ESC && champ.getHP() > 0) {
 		clear();
-		jet.printScore(pl);
 		pl.takeWindSize();
 		pl.printBorder();
 		inp = getch();
@@ -102,23 +114,10 @@ void	printLogo(Playground pl) {
 	start_color();
 	init_pair(1,COLOR_YELLOW,COLOR_BLACK);
 	attron(COLOR_PAIR(1));
-	mvprintw(pl.getY() / 8 + 7, pl.getX() / 2 - (pl.getX() / 3), " ____________________________________");
-	mvprintw(pl.getY() / 8 + 8, pl.getX() / 2 - (pl.getX() / 3), "|           SPACE INVADERS           |");
-	mvprintw(pl.getY() / 8 + 9, pl.getX() / 2 - (pl.getX() / 3), "|____________________________________|");
+	mvprintw(4, 32, " ____________________________________");
+	mvprintw(5, 32, "|           SPACE INVADERS           |");
+	mvprintw(6, 32, "|____________________________________|");
 	attroff(COLOR_PAIR(1));
-}
-
-void		printScore(Playground & pl) {
-	start_color();
-	init_pair(19,COLOR_GREEN,COLOR_BLACK);
-	attron(COLOR_PAIR(19));
-	mvwprintw(pl.getWindow(), 1, 2, " _____________________ " );
-	mvwprintw(pl.getWindow(), 2, 2, "| HIGHT SCORE :       |" );
-	mvwprintw(pl.getWindow(), 3, 2, "|_____________________|" );
-	std::string		str;
-	mvwprintw(pl.getWindow(), 1, 16, str.c_str());
-	attroff(COLOR_PAIR(19));
-	refresh();
 }
 
 void	printMenu(Playground & pl) {
@@ -131,66 +130,69 @@ void	printMenu(Playground & pl) {
 	init_pair(2,COLOR_GREEN,COLOR_BLACK);
 	init_pair(3,COLOR_GREEN,COLOR_RED);
 	while(inp != KEY_ESC) {
+		refresh();
+		if (COLS < 50 || LINES < 100)
+			system("printf '\e[8;50;100t'");
+		refresh();
 		nodelay(stdscr, FALSE);
 		clear();
 		printLogo(pl);
 		attron(COLOR_PAIR(2));
 		if (i == 0) {
 			attron(COLOR_PAIR(3));
-			mvprintw(pl.getY() / 4 + 8, pl.getX() / 2 - (pl.getX() / 5), " ______ ");
-			mvprintw(pl.getY() / 4 + 9, pl.getX() / 2 - (pl.getX() / 5), "| EASY |");
-			mvprintw(pl.getY() / 4 + 10, pl.getX() / 2 - (pl.getX() / 5), "|______|");
+			mvprintw(8, 47, " ______ ");
+			mvprintw(9, 47, "| EASY |");
+			mvprintw(10, 47, "|______|");
 
 			attroff(COLOR_PAIR(3));
 			attron(COLOR_PAIR(2));
 		} else {
-			mvprintw(pl.getY() / 4 + 8, pl.getX() / 2 - (pl.getX() / 5), " ______ ");
-			mvprintw(pl.getY() / 4 + 9, pl.getX() / 2 - (pl.getX() / 5), "| EASY |");
-			mvprintw(pl.getY() / 4 + 10, pl.getX() / 2 - (pl.getX() / 5), "|______|");
+			mvprintw(8, 47, " ______ ");
+			mvprintw(9, 47, "| EASY |");
+			mvprintw(10, 47, "|______|");
 		}
 		
 		if (i == 1) {
 			attron(COLOR_PAIR(3));
-			mvprintw(pl.getY() / 4 + 15, pl.getX() / 2 - (pl.getX() / 5), " ______ ");
-			mvprintw(pl.getY() / 4 + 16, pl.getX() / 2 - (pl.getX() / 5), "| NORM |");
-			mvprintw(pl.getY() / 4 + 17, pl.getX() / 2 - (pl.getX() / 5), "|______|");
+			mvprintw(15, 47, " ______ ");
+			mvprintw(16, 47, "| NORM |");
+			mvprintw(17, 47, "|______|");
 
 			attroff(COLOR_PAIR(3));
 			attron(COLOR_PAIR(2));
 		} else {
-			mvprintw(pl.getY() / 4 + 15, pl.getX() / 2 - (pl.getX() / 5), " ______ ");
-			mvprintw(pl.getY() / 4 + 16, pl.getX() / 2 - (pl.getX() / 5), "| NORM |");
-			mvprintw(pl.getY() / 4 + 17, pl.getX() / 2 - (pl.getX() / 5), "|______|");
+			mvprintw(15, 47, " ______ ");
+			mvprintw(16, 47, "| NORM |");
+			mvprintw(17, 47, "|______|");
 		}
 		
 		if (i == 2) {
 			attron(COLOR_PAIR(3));
-			mvprintw(pl.getY() / 4 + 22, pl.getX() / 2 - (pl.getX() / 5), " ______ ");
-			mvprintw(pl.getY() / 4 + 23, pl.getX() / 2 - (pl.getX() / 5), "| HARD |");
-			mvprintw(pl.getY() / 4 + 24, pl.getX() / 2 - (pl.getX() / 5), "|______|");
+			mvprintw(22, 47, " ______ ");
+			mvprintw(23, 47, "| HARD |");
+			mvprintw(24, 47, "|______|");
 
 			attroff(COLOR_PAIR(3));
 			attron(COLOR_PAIR(2));
 		} else {
-			mvprintw(pl.getY() / 4 + 22, pl.getX() / 2 - (pl.getX() / 5), " ______ ");
-			mvprintw(pl.getY() / 4 + 23, pl.getX() / 2 - (pl.getX() / 5), "| HARD |");
-			mvprintw(pl.getY() / 4 + 24, pl.getX() / 2 - (pl.getX() / 5), "|______|");
+			mvprintw(22, 47, " ______ ");
+			mvprintw(23, 47, "| HARD |");
+			mvprintw(24, 47, "|______|");
 		}
 		
 		if (i == 3) {
 			attron(COLOR_PAIR(3));
-			mvprintw(pl.getY() / 4 + 29, pl.getX() / 2 - (pl.getX() / 5), " ______ ");
-			mvprintw(pl.getY() / 4 + 30, pl.getX() / 2 - (pl.getX() / 5), "| EXIT |");
-			mvprintw(pl.getY() / 4 + 31, pl.getX() / 2 - (pl.getX() / 5), "|______|");
+			mvprintw(29, 47, " ______ ");
+			mvprintw(30, 47, "| EXIT |");
+			mvprintw(31, 47, "|______|");
 
 			attroff(COLOR_PAIR(3));
 			attron(COLOR_PAIR(2));
 		} else {
-			mvprintw(pl.getY() / 4 + 29, pl.getX() / 2 - (pl.getX() / 5), " ______ ");
-			mvprintw(pl.getY() / 4 + 30, pl.getX() / 2 - (pl.getX() / 5), "| EXIT |");
-			mvprintw(pl.getY() / 4 + 31, pl.getX() / 2 - (pl.getX() / 5), "|______|");
+			mvprintw(29, 47, " ______ ");
+			mvprintw(30, 47, "| EXIT |");
+			mvprintw(31, 47, "|______|");
 		}
-		printScore(pl);
 		attroff(COLOR_PAIR(2));
 
 		inp = getch();
@@ -220,7 +222,6 @@ void	menu(void) {
 	init_pair(1,COLOR_BLUE,COLOR_BLACK);
 	init_pair(2,COLOR_RED,COLOR_BLACK);
 	attron(COLOR_PAIR(1));
-	printScore(pl);
 	printLogo(pl);
 	printMenu(pl);
 	attroff(COLOR_PAIR(1));

@@ -69,18 +69,6 @@ void					Object::setForm(std::string form) {
 	return;
 }
 
-void		Object::printScore(Playground & pl)const {
-	start_color();
-	init_pair(19, COLOR_GREEN, COLOR_BLACK);
-	attron(COLOR_PAIR(19));
-	mvwprintw(pl.getWindow(), 1, 2, " _____________ " );
-	mvwprintw(pl.getWindow(), 2, 2, "| SCORE :     |" );
-	mvwprintw(pl.getWindow(), 3, 2, "|_____________|" );
-	std::string line;
-	mvwprintw(pl.getWindow(), 1, 10, line.c_str());
-	attroff(COLOR_PAIR(19));
-}
-
 void					Object::explode(Playground& pl, int f) {
 	start_color();
 	init_pair(19, COLOR_GREEN, COLOR_BLACK);

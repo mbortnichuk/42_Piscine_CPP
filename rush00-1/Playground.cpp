@@ -14,6 +14,7 @@
 
 Playground::Playground(void):clr(0) {
 	initscr();
+	system("printf '\e[8;50;100t'");
 	mWind = stdscr;
 	noecho();
 	curs_set(FALSE);
@@ -74,7 +75,10 @@ void	Playground::printBorder() {
 
 void 	Playground::takeWindSize(void) {
 	getmaxyx(mWind, mSizey, mSizex);
+	if (mSizey < 50 || mSizex < 100)
+		system("printf '\e[8;50;100t'");
 	printBorder();
+	refresh();
 }
 
 Playground& Playground::operator=(Playground const & rhs) {
