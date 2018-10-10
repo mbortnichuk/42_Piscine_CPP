@@ -36,23 +36,26 @@ OSInfoModule::OSInfoModule(void):height(6) {
 	}
 }
 
-OSInfoModule::~OSInfoModule(void) {
-	return;
-}
+OSInfoModule::~OSInfoModule(void) { return; }
 
-int OSInfoModule::getHeight(void)const {
-	return (this->height);
-}
+int OSInfoModule::getHeight(void)const { return (this->height); }
 
 void OSInfoModule::show(int y) {
-	mvprintw(y, 0, "#------- OS INFO -------#");
-	mvprintw(y + 1, 1, "Kernel name    : %s", this->osType.c_str());
-	mvprintw(y + 2, 1, "Kernel version : %s", this->osRelease.c_str());
+	start_color();
+	init_pair(4, COLOR_BLACK, COLOR_CYAN);
+	attron(COLOR_PAIR(4));
+	mvprintw(y, 0, "[*]------------  OS INFO   -----------[*]");
+	attroff(COLOR_PAIR(4));
+	mvprintw(y + 1, 1, "Kernel name        : %s", this->osType.c_str());
+	mvprintw(y + 2, 1, "Kernel version     : %s", this->osRelease.c_str());
 
 	if (atoi(this->osRelease.c_str()) == 14)
 		mvprintw(y + 3, 1, "Product name:    Yosemite");
 	else if (atoi(this->osRelease.c_str()) == 13)
 		mvprintw(y + 3, 1, "Product name:     Maverik");
 
-	mvprintw(y + 4, 1, "Product version : %s", this->osHost.c_str());
+	mvprintw(y + 4, 1, "Product version    : %s", this->osHost.c_str());
+	attron(COLOR_PAIR(4));
+	mvprintw(y + 5, 0, "-----------------------------------------");
+	attroff(COLOR_PAIR(4));
 }

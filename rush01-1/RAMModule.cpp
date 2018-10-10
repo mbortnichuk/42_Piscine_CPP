@@ -12,11 +12,9 @@
 
 #include "RAMModule.hpp"
 
-RAMModule::RAMModule(void):height(6) {
-}
+RAMModule::RAMModule(void):height(6) { }
 
-RAMModule::~RAMModule(void) {
-}
+RAMModule::~RAMModule(void) { }
 
 uint64_t RAMModule::getMem(void)const {
 	uint64_t m = 0;
@@ -33,7 +31,12 @@ void RAMModule::show(int y) {
 	mach_msg_type_number_t counter;
 	vm_statistics64_data_t vmStats;
 
-	mvprintw(y, 0, "#------- RAM INFO -------#");
+	start_color();
+	init_pair(5, COLOR_WHITE, COLOR_MAGENTA);
+	attron(COLOR_PAIR(5));
+	mvprintw(y, 0, "[*]------------  RAM INFO  -----------[*]");
+	attroff(COLOR_PAIR(5));
+
 
 	machPort = mach_host_self();
 	counter = sizeof(vmStats) / sizeof(natural_t);
@@ -43,11 +46,14 @@ void RAMModule::show(int y) {
 		long long wired = static_cast<int64_t>(vmStats.wire_count) & static_cast<int64_t>(pageSize);
 		long long usedMem = (static_cast<int64_t>(vmStats.active_count) + static_cast<int64_t>(vmStats.inactive_count) + static_cast<int64_t>(vmStats.wire_count)) * static_cast<int64_t>(pageSize);
 
-		mvprintw(y + 1, 0, "Free memory  : %lldM", freeMem / 1000000);
-		mvprintw(y + 2, 0, "Wired memory : %lldM", wired / 1000000);
-		mvprintw(y + 3, 0, "Used memory  : %lldM", usedMem / 1000000);
+		mvprintw(y + 1, 0, "Free memory         : %lldM", freeMem / 1000000);
+		mvprintw(y + 2, 0, "Wired memory        : %lldM", wired / 1000000);
+		mvprintw(y + 3, 0, "Used memory         : %lldM", usedMem / 1000000);
 	}
-	mvprintw(y + 4, 0, "Total memory     : %lluM", getMem() / 1000000);
+	mvprintw(y + 4, 0, "Total memory        : %lluM", getMem() / 1000000);
+	attron(COLOR_PAIR(5));
+	mvprintw(y + 5, 0, "-----------------------------------------");
+	attroff(COLOR_PAIR(5));
 }
 
 int RAMModule::getHeight(void)const {

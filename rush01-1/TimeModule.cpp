@@ -12,17 +12,11 @@
 
 #include "TimeModule.hpp"
 
-TimeModule::TimeModule(void):height(3) {
-	return;
-}
+TimeModule::TimeModule(void):height(3) { return; }
 
-TimeModule::~TimeModule(void) {
-	return;
-}
+TimeModule::~TimeModule(void) { return; }
 
-int TimeModule::getHeight(void)const {
-	return (this->height);
-}
+int TimeModule::getHeight(void)const { return (this->height); }
 
 void TimeModule::show(int y) {
 	time_t rawTime;
@@ -32,6 +26,14 @@ void TimeModule::show(int y) {
 	time(&rawTime);
 	timeInfo = localtime(&rawTime);
 	strftime(buff, 26, "%c", timeInfo);
-	mvprintw(y, 0, "#------- DATE -------#");
-	mvprintw(y + 1, 0, " %s", buff);
+
+	start_color();
+	init_pair(6, COLOR_WHITE, COLOR_BLUE);
+	attron(COLOR_PAIR(6));
+	mvprintw(y, 0, "[*]----------  DATE / TIME  ----------[*]");
+	attroff(COLOR_PAIR(6));
+	mvprintw(y + 1, 0, "	%s", buff);
+	attron(COLOR_PAIR(6));
+	mvprintw(y + 2, 0, "-----------------------------------------");
+	attroff(COLOR_PAIR(6));
 }

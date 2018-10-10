@@ -12,13 +12,9 @@
 
 #include "NetworkModule.hpp"
 
-NetworkModule::NetworkModule(void):height(4) {
-	return;
-}
+NetworkModule::NetworkModule(void):height(4) { return; }
 
-NetworkModule::~NetworkModule(void) {
-	return;
-}
+NetworkModule::~NetworkModule(void) { return; }
 
 int NetworkModule::getHeight(void)const {
 	return (this->height);
@@ -33,7 +29,14 @@ void NetworkModule::show(int y) {
 
 	struct ipstat *g = (struct ipstat*)oldP;
 
-	mvprintw(y, 0, "#------- NETWORK -------#");
+	start_color();
+	init_pair(3, COLOR_WHITE, COLOR_RED);
+	attron(COLOR_PAIR(3));
+	mvprintw(y, 0, "[*]------------  NETWORK   -----------[*]");
+	attroff(COLOR_PAIR(3));
 	mvprintw(y + 1, 0, "IP packets received : %d\n", g->ips_total);
 	mvprintw(y + 2, 0, "IP packets sent     : %d\n", g->ips_localout);
+	attron(COLOR_PAIR(3));
+	mvprintw(y + 3, 0, "-----------------------------------------");
+	attroff(COLOR_PAIR(3));
 }

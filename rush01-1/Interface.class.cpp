@@ -12,9 +12,7 @@
 
 #include "Interface.class.hpp"
 
-Interface::Interface(void):y(0), mod(0) {
-	return;
-}
+Interface::Interface(void):y(0), mod(0) { return; }
 
 Interface::~Interface(void) {
 	endwin();
@@ -102,9 +100,13 @@ void Interface::start(void) {
 	NetworkModule net;
 	OSInfoModule os;
 
+	initscr();
 	this->init();
 	while ((key = this->getKey(cpu, host, time, net, ram, os)) != ESC) {
+		if (COLS != 30 || LINES != 45)
+			system("printf '\e[8;29;41t'");
 		erase();
+		
 		if (this->mod & (1 << 1))
 			cpu.show(this->pos[0]);
 		if (this->mod & (1 << 2))
@@ -117,6 +119,7 @@ void Interface::start(void) {
 			ram.show(this->pos[4]);
 		if (this->mod & (1 << 6))
 			os.show(this->pos[5]);
+
 		wrefresh(stdscr);
 		sleep(1);
 	}

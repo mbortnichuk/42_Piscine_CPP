@@ -44,7 +44,7 @@ private:
 	unsigned long long prevUsrTicks;
 	unsigned long long prevSysTicks;
 	unsigned long long sysTicks;
-	unsigned long long userTicks;
+	unsigned long long usrTicks;
 	unsigned long long idleTicks;
 
 	host_cpu_load_info_data_t cpuInfo;
